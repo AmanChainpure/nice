@@ -1,5 +1,6 @@
-all_support_documents_with_name_tags = (
-    "# Business Document\n" + business_doc + "\n\n" +
-    "# Solution Document\n" + solution_doc + "\n\n" +
-    "# User Story\n" + user_story
-)
+print("Estimated Tokens for Context Prompt:", estimate_tokens(context))
+print("Estimated Tokens for Glossary:", estimate_tokens(glossary))
+print("Estimated Tokens for User Story:", estimate_tokens(user_story))
+print("Estimated Tokens for Business Doc (PDF):", estimate_tokens(business_doc))
+print("Estimated Tokens for Solution Doc (PDF):", estimate_tokens(solution_doc))
+print("Estimated Tokens for Generator Prompt:", estimate_tokens(generator_prompt))
