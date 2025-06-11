@@ -1,3 +1,8 @@
+import math
+
+def estimate_tokens(text):
+    return max(1, math.ceil(len(text) / 4))
+
 print("Estimated Tokens for Context Prompt:", estimate_tokens(context))
 print("Estimated Tokens for Glossary:", estimate_tokens(glossary))
 print("Estimated Tokens for User Story:", estimate_tokens(user_story))
