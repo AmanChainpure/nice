@@ -1,0 +1,52 @@
+import markdownify
+import os
+
+def html_file_to_markdown(html_file_path, markdown_file_path=None):
+    """
+    Converts an HTML file to a Markdown string and optionally saves it to a file.
+
+    Args:
+        html_file_path (str): The path to the input HTML file.
+        markdown_file_path (str, optional): The path to save the output Markdown file.
+                                            If None, the Markdown string is returned but not saved.
+                                            Defaults to None.
+
+    Returns:
+        str: The Markdown content.
+        None: If an error occurs during file reading or conversion.
+    """
+    try:
+        with open(html_file_path, 'r', encoding='utf-8') as f:
+            html_content = f.read()
+
+        markdown_content = markdownify.markdownify(html_content)
+
+        if markdown_file_path:
+            output_dir = os.path.dirname(markdown_file_path)
+            if output_dir:  # Ensure directory exists if a full path is given
+                os.makedirs(output_dir, exist_ok=True)
+            with open(markdown_file_path, 'w', encoding='utf-8') as f:
+                f.write(markdown_content)
+            print(f"Successfully converted '{html_file_path}' to '{markdown_file_path}'")
+
+        return markdown_content
+
+    except FileNotFoundError:
+        print(f"Error: HTML file not found at '{html_file_path}'")
+        return None
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return None
+
+
+# Step 2: Specify paths
+html_path = "/path/to/input.html"
+markdown_path = "/path/to/output.md"
+
+# Step 3: Call the function
+markdown_output = html_file_to_markdown(html_path, markdown_path)
+
+# Step 4 (optional): Print the Markdown output if you want
+if markdown_output:
+    print("\n--- Markdown Output ---")
+    print(markdown_output)
